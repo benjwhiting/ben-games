@@ -14,7 +14,7 @@ secretNumber = random.randint(1, 20)
 for guessCount in range(10):
 	
 	guessLeft = str(9 - guessCount)
-	Tries_taken = str(10 - guessLeft)
+	Tries_taken = int(10 - guessLeft)
 	# Check for valid input
 	validInput = False
 	print("")
