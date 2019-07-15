@@ -14,7 +14,7 @@ secretNumber = random.randint(1, 20)
 for guessCount in range(10):
 	
 	guessLeft = str(9 - guessCount)
-
+	Tries_taken = str(10 - guessLeft)
 	# Check for valid input
 	validInput = False
 	print("")
@@ -42,5 +42,5 @@ for guessCount in range(10):
 		print('Wrong! Your guess is too high! You have ' + guessLeft + ' more turns, try again.')
 	else:
 		print("")
-		print("Congratulations " + playerName + "! You guessed right!")
+		print("Congratulations " + playerName + "! You guessed right! " + " it took you " + Tries_taken + " tries")
 		break
