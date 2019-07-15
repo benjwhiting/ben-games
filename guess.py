@@ -13,8 +13,9 @@ secretNumber = random.randint(1, 20)
 # Loop for multiple guesses
 for guessCount in range(10):
 	
-	guessLeft = str(9 - guessCount)
-	Tries_taken = int(10 - guessLeft)
+	guessLeft = 9 - guessCount
+	triesTaken = 10 - guessLeft
+
 	# Check for valid input
 	validInput = False
 	print("")
@@ -37,10 +38,10 @@ for guessCount in range(10):
 	#  Make the game respond with warmer or colder
 
 	if(guessNum < secretNumber):
-		print("Wrong! Your guess is too low! You have " + guessLeft + " more turns, try again.")
+		print("Wrong! Your guess is too low! You have " + str(guessLeft) + " more turns, try again.")
 	elif(guessNum > secretNumber):
-		print('Wrong! Your guess is too high! You have ' + guessLeft + ' more turns, try again.')
+		print('Wrong! Your guess is too high! You have ' + str(guessLeft) + ' more turns, try again.')
 	else:
 		print("")
-		print("Congratulations " + playerName + "! You guessed right! " + " it took you " + Tries_taken + " tries")
+		print("Congratulations " + playerName + "! You guessed right, it took you " + str(triesTaken) + " tries.")
 		break
