@@ -21,14 +21,24 @@ for guessCount in range(10):
 	print("")
 	print("Choose a number between 1 and 20:")
 	while not validInput:
+		guessNum = None
 		guess = input()
-		guessNum = int(guess)
-		
-		# Ben's error checking
-		if(guessNum < 1) or (guessNum > 20):
-			print("Numbers must be between 1 and 20. Try again:")
+		try:
+			guessNum = int(guess)
+		except:
+			pass
+
+		#check whether guessNum is an integer
+		if isinstance(guessNum, int):
+
+			# Ben's error checking
+			if(guessNum < 1) or (guessNum > 20):
+				print("Numbers must be between 1 and 20. Try again:")
+			else:
+				validInput = True
+
 		else:
-			validInput = True
+			print("Input must be a number between 1 and 20. Try again:")
 
 	#print("")
 	#print("You guessed " + guess)
@@ -43,5 +53,5 @@ for guessCount in range(10):
 		print('Wrong! Your guess is too high! You have ' + str(guessLeft) + ' more turns, try again.')
 	else:
 		print("")
-		print("Congratulations " + playerName + "! You guessed right, it took you " + str(triesTaken) + " tries.")
+		print("Congratulations " + playerName + "! You guessed right, it took you " + str(triesTaken) + " tries.\n")
 		break
