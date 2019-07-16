@@ -10,6 +10,7 @@ print("Hi " + playerName + "!")
 
 secretNumber = random.randint(1, 20)
 
+
 # Loop for multiple guesses
 for guessCount in range(10):
 	
@@ -38,7 +39,7 @@ for guessCount in range(10):
 				validInput = True
 
 		else:
-			print("Input must be a number between 1 and 20. Try again:")
+			print("Input must be a integer between 1 and 20. Try again:")
 
 	#print("")
 	#print("You guessed " + guess)
@@ -52,6 +53,11 @@ for guessCount in range(10):
 	elif(guessNum > secretNumber):
 		print('Wrong! Your guess is too high! You have ' + str(guessLeft) + ' more turns, try again.')
 	else:
+		# Print two different messages: the first if they get it right the first time,
+		# the second just like we have it below.
 		print("")
-		print("Congratulations " + playerName + "! You guessed right, it took you " + str(triesTaken) + " tries.\n")
+		if(triesTaken == 1):
+			print("No way, " + playerName + "! You guessed it on the first try! \n")
+		else:
+			print("Congratulations " + playerName + "! You guessed right, it took you " + str(triesTaken) + " tries.\n")
 		break
