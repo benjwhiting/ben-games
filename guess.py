@@ -8,19 +8,23 @@ playerName = input()
 print("")
 print("Hi " + playerName + "!")
 
-secretNumber = random.randint(1, 20)
-
+guessNumber = 10
+maxNumber = 20
+secretNumber = random.randint(1, maxNumber)
 
 # Loop for multiple guesses
-for guessCount in range(10):
-	
-	guessLeft = 9 - guessCount
-	triesTaken = 10 - guessLeft
+for i in range(guessNumber):
+
+	guessCount = i + 1  
+
+	guessLeft = guessNumber - guessCount
+	triesTaken = guessNumber - guessLeft
 
 	# Check for valid input
 	validInput = False
 	print("")
-	print("Choose a number between 1 and 20:")
+	#print("Choose a number between 1 and 20:")
+	print("Choose a number between 1 and " + str(maxNumber) + ":")
 	while not validInput:
 		guessNum = None
 		guess = input()
@@ -33,13 +37,15 @@ for guessCount in range(10):
 		if isinstance(guessNum, int):
 
 			# Ben's error checking
-			if(guessNum < 1) or (guessNum > 20):
-				print("Numbers must be between 1 and 20. Try again:")
+			if(guessNum < 1) or (guessNum > maxNumber):
+				#print("Numbers must be between 1 and 20. Try again:")
+				print("Numbers must be between 1 and " + str(maxNumber) + ". Try again:")
 			else:
 				validInput = True
 
 		else:
-			print("Input must be a integer between 1 and 20. Try again:")
+#			print("Input must be a integer between 1 and 20. Try again:")
+			print("Input must be a integer between 1 and " + str(maxNumber) + ". Try again:")
 
 	#print("")
 	#print("You guessed " + guess)
@@ -47,17 +53,34 @@ for guessCount in range(10):
 
 	# Ben's good idea:
 	#  Make the game respond with warmer or colder
+	#    Warmer means: getting closer to right answer
+	#    Colder means: getting further from right answer
+	#    close = abs(guess - answer)
+	#    close_new = abs(guess - answer)
+	#    first time: guess we say high or low
 
-	if(guessNum < secretNumber):
-		print("Wrong! Your guess is too low! You have " + str(guessLeft) + " more turns, try again.")
-	elif(guessNum > secretNumber):
-		print('Wrong! Your guess is too high! You have ' + str(guessLeft) + ' more turns, try again.')
-	else:
-		# Print two different messages: the first if they get it right the first time,
-		# the second just like we have it below.
-		print("")
-		if(triesTaken == 1):
-			print("No way, " + playerName + "! You guessed it on the first try! \n")
+	# if it's the first turn, then do high or low
+	# any turn after that is warmer or colder
+
+	if (guessCount == 1):
+		closeNew = abs(guessNum - secretNumber)
+		if(guessNum < secretNumber):
+			print("Wrong! Your guess is too low! You have " + str(guessLeft) + " more turns, try again.")
+		elif(guessNum > secretNumber):
+			print('Wrong! Your guess is too high! You have ' + str(guessLeft) + ' more turns, try again.')
 		else:
+			print("No way, " + playerName + "! You guessed it on the first try! \n")
+			break
+	else:
+		closeOld = closeNew
+		closeNew = abs(guessNum - secretNumber)
+		warmer = closeNew < closeOld
+		colder = closeNew > closeOld
+		if (closeNew == 0):
 			print("Congratulations " + playerName + "! You guessed right, it took you " + str(triesTaken) + " tries.\n")
-		break
+			break	
+		elif (warmer):
+			print("You are getting warmer. You have " + str(guessLeft) + " more turns, try again.")
+		elif (colder):	
+			print("You are getting colder. You have " + str(guessLeft) + " more turns, try again.")
+		
