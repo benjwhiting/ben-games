@@ -8,10 +8,10 @@ playerName = input()
 print("")
 print("Hi " + playerName + "!")
 
-guessNumber = 5
+guessNumber = 10
 maxNumber = 20
-#secretNumber = random.randint(1, maxNumber)
-secretNumber = 15
+secretNumber = random.randint(1, maxNumber)
+#secretNumber = 15
 
 #
 # ## ADVANCED: Ask whether they want to play again
