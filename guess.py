@@ -11,6 +11,10 @@ print("Hi " + playerName + "!")
 guessNumber = 10
 maxNumber = 20
 secretNumber = random.randint(1, maxNumber)
+#secretNumber = 15
+
+#
+# ## ADVANCED: Ask whether they want to play again
 
 # Loop for multiple guesses
 for i in range(guessNumber):
@@ -51,13 +55,10 @@ for i in range(guessNumber):
 	#print("You guessed " + guess)
 	# print("The real number is " + str(secretNumber))
 
-	# Ben's good idea:
-	#  Make the game respond with warmer or colder
-	#    Warmer means: getting closer to right answer
-	#    Colder means: getting further from right answer
-	#    close = abs(guess - answer)
-	#    close_new = abs(guess - answer)
-	#    first time: guess we say high or low
+	if guessLeft == 1:
+		turns = "turn"
+	else:
+		turns = "turns"
 
 	# if it's the first turn, then do high or low
 	# any turn after that is warmer or colder
@@ -71,7 +72,7 @@ for i in range(guessNumber):
 		else:
 			print("No way, " + playerName + "! You guessed it on the first try! \n")
 			break
-	else:
+	elif (guessCount < guessNumber):
 		closeOld = closeNew
 		closeNew = abs(guessNum - secretNumber)
 		warmer = closeNew < closeOld
@@ -80,7 +81,12 @@ for i in range(guessNumber):
 			print("Congratulations " + playerName + "! You guessed right, it took you " + str(triesTaken) + " tries.\n")
 			break	
 		elif (warmer):
-			print("You are getting warmer. You have " + str(guessLeft) + " more turns, try again.")
+			print("You are getting warmer. You have " + str(guessLeft) + " more " + turns + ", try again.")
 		elif (colder):	
-			print("You are getting colder. You have " + str(guessLeft) + " more turns, try again.")
-		
+			print("You are getting colder. You have " + str(guessLeft) + " more " + turns + ", try again.")
+	else:
+		if (guessNum == secretNumber):
+			print("Congratulations " + playerName + "! You guessed right, it took you " + str(triesTaken) + " tries.\n")
+			break				
+		else:
+			print('Game over! The real number was ' + str(secretNumber) + '.\n')
